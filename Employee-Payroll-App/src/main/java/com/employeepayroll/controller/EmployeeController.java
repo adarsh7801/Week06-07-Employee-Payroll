@@ -16,13 +16,19 @@ class EmployeeController {
     private EmployeeService service;
 
     @GetMapping
-    public List<Employee> getAllEmployees() { return service.getAllEmployees(); }
+    public List<Employee> getAllEmployees() {
+        return service.getAllEmployees();
+    }
 
     @GetMapping("/{id}")
-    public Employee getEmployeeById(@PathVariable Long id) { return service.getEmployeeById(id); }
+    public Employee getEmployeeById(@PathVariable Long id) {
+        return service.getEmployeeById(id);
+    }
 
     @PostMapping
-    public Employee createEmployee(@RequestBody EmployeeDTO employee) { return service.saveEmployee(employee); }
+    public Employee createEmployee(@RequestBody EmployeeDTO employee) {
+        return service.saveEmployee(employee);
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody EmployeeDTO employee) {
