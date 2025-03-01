@@ -25,10 +25,10 @@ class EmployeeController {
         return service.getEmployeeById(id);
     }
 
-    /*@PostMapping
+    @PostMapping
     public Employee createEmployee(@RequestBody EmployeeDTO employee) {
         return service.saveEmployee(employee);
-    }*/
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody EmployeeDTO employee) {

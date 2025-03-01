@@ -41,7 +41,7 @@ public class EmployeeService {
         return repository.save(existingEmployee);
     }
 
-    *//*public Employee updateEmployee(Long id, EmployeeDTO employeeDTO) {
+    /*public Employee updateEmployee(Long id, EmployeeDTO employeeDTO) {
         Employee employee = repository.findById(id).orElse(null);
         if (employee != null) {
             employee.setName(employeeDTO.getName());
@@ -50,7 +50,6 @@ public class EmployeeService {
         }
         return null;
     }*/
-
 
     private final List<Employee> employeeList = new ArrayList<>();
     private final AtomicLong idCounter = new AtomicLong(1); // Generates unique IDs
@@ -66,7 +65,7 @@ public class EmployeeService {
                 .orElseThrow(() -> new EmployeeNotFoundException("Employee not found with ID: " + id));
     }
 
-    public Employee createEmployee(EmployeeDTO employeeDTO) {
+    public Employee saveEmployee(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
         employee.setId(idCounter.getAndIncrement()); // Assign unique ID
         employee.setName(employeeDTO.getName());
@@ -88,5 +87,4 @@ public class EmployeeService {
     }
 
     //As we further down we'll persist this data in database.
-
 }
