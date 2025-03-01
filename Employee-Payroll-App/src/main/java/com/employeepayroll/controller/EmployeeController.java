@@ -22,7 +22,7 @@ class EmployeeController {
     @GetMapping("/{id}")
     public Employee getEmployeeById(@PathVariable Long id) { return service.getEmployeeById(id); }
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<Employee> createEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
 
         return ResponseEntity.ok(service.saveEmployee(employeeDTO));

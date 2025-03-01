@@ -1,27 +1,39 @@
 package com.employeepayroll.model;
 
+import com.employeepayroll.dto.EmployeeDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-@Getter
-@Setter
-public class Employee {
+public @Data class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private double salary;
+    private String gender;
+    private String note;
+    private String profilePic;
+    private LocalDate startDate;
+    private List<String> department;
 
     public Employee() {}
 
-    public Employee(String name, double salary) {
-        this.name = name;
-        this.salary = salary;
+    public Employee(EmployeeDTO employeeDTO) {
+        this.name = employeeDTO.getName();
+        this.gender = employeeDTO.getGender();
+        this.salary = employeeDTO.getSalary();
+        this.note = employeeDTO.getNote();
+        this.startDate = employeeDTO.getStartDate();
+        this.profilePic = employeeDTO.getProfilePic();
+        this.department = employeeDTO.getDepartment();
+
     }
 
     /*// Getters and Setters
