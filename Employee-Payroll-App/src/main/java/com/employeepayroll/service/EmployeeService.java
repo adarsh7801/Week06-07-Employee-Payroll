@@ -17,10 +17,20 @@ public class EmployeeService {
     private EmployeeRepository repository;
 
     public List<Employee> getAllEmployees() { return repository.findAll(); }
-    public Employee getEmployeeById(Long id) { return repository.findById(id).orElse(null); }
+    public Employee getEmployeeById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EmployeeNotFoundException("Employee not found with ID: " + id));
+    }
 
     public Employee saveEmployee(EmployeeDTO employeeDTO) {
-        Employee employee = new Employee(employeeDTO.getName(), employeeDTO.getSalary());
+        Employee employee = new Employee();
+        employee.setName(employeeDTO.getName());
+        employee.setSalary(employeeDTO.getSalary());
+        employee.setGender(employeeDTO.getGender());
+        employee.setStartDate(employeeDTO.getStartDate());
+        employee.setNote(employeeDTO.getNote());
+        employee.setProfilePic(employeeDTO.getProfilePic());
+        employee.setDepartment(employeeDTO.getDepartment());
         return repository.save(employee);
     }
     public void deleteEmployee(Long id) {
