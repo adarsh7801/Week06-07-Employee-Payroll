@@ -23,14 +23,7 @@ public class EmployeeService {
     }
 
     public Employee saveEmployee(EmployeeDTO employeeDTO) {
-        Employee employee = new Employee();
-        employee.setName(employeeDTO.getName());
-        employee.setSalary(employeeDTO.getSalary());
-        employee.setGender(employeeDTO.getGender());
-        employee.setStartDate(employeeDTO.getStartDate());
-        employee.setNote(employeeDTO.getNote());
-        employee.setProfilePic(employeeDTO.getProfilePic());
-        employee.setDepartment(employeeDTO.getDepartment());
+        Employee employee = new Employee(employeeDTO.getName(), employeeDTO.getSalary());
         return repository.save(employee);
     }
     public void deleteEmployee(Long id) {
