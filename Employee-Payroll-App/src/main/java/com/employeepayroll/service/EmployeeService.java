@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class EmployeeService {
-    /*@Autowired
+    @Autowired
     private EmployeeRepository repository;
 
     public List<Employee> getAllEmployees() { return repository.findAll(); }
@@ -51,7 +51,7 @@ public class EmployeeService {
         return null;
     }*/
 
-    private final List<Employee> employeeList = new ArrayList<>();
+    /*private final List<Employee> employeeList = new ArrayList<>();
     private final AtomicLong idCounter = new AtomicLong(1); // Generates unique IDs
 
     public List<Employee> getAllEmployees() {
@@ -86,5 +86,5 @@ public class EmployeeService {
         employeeList.remove(existingEmployee);
     }
 
-    //As we further down we'll persist this data in database.
+    //As we further down we'll persist this data in database.*/
 }
