@@ -8,11 +8,13 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class EmployeeService {
-    @Autowired
+    /*@Autowired
     private EmployeeRepository repository;
 
     public List<Employee> getAllEmployees() { return repository.findAll(); }
@@ -39,7 +41,7 @@ public class EmployeeService {
         return repository.save(existingEmployee);
     }
 
-    /*public Employee updateEmployee(Long id, EmployeeDTO employeeDTO) {
+    *//*public Employee updateEmployee(Long id, EmployeeDTO employeeDTO) {
         Employee employee = repository.findById(id).orElse(null);
         if (employee != null) {
             employee.setName(employeeDTO.getName());
@@ -48,4 +50,43 @@ public class EmployeeService {
         }
         return null;
     }*/
+
+
+    private final List<Employee> employeeList = new ArrayList<>();
+    private final AtomicLong idCounter = new AtomicLong(1); // Generates unique IDs
+
+    public List<Employee> getAllEmployees() {
+        return employeeList;
+    }
+
+    public Employee getEmployeeById(Long id) {
+        return employeeList.stream()
+                .filter(emp -> emp.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new EmployeeNotFoundException("Employee not found with ID: " + id));
+    }
+
+    public Employee createEmployee(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        employee.setId(idCounter.getAndIncrement()); // Assign unique ID
+        employee.setName(employeeDTO.getName());
+        employee.setSalary(employeeDTO.getSalary());
+        employeeList.add(employee);
+        return employee;
+    }
+
+    public Employee updateEmployee(Long id, EmployeeDTO employeeDTO) {
+        Employee existingEmployee = getEmployeeById(id); // Find existing employee
+        existingEmployee.setName(employeeDTO.getName());
+        existingEmployee.setSalary(employeeDTO.getSalary());
+        return existingEmployee;
+    }
+
+    public void deleteEmployee(Long id) {
+        Employee existingEmployee = getEmployeeById(id);
+        employeeList.remove(existingEmployee);
+    }
+
+    //As we further down we'll persist this data in database.
+
 }
